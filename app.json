@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "PermitDetection",
-    "slug": "PermitDetection",
+    "name": "Parkd",
+    "slug": "parkd",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -14,10 +14,12 @@
     },
     "ios": {
       "supportsTablet": true,
+      "bundleIdentifier": "com.yourname.parkd",
       "infoPlist": {
         "NSMotionUsageDescription": false,
         "NSHealthShareUsageDescription": false,
-        "NSHealthUpdateUsageDescription": false
+        "NSHealthUpdateUsageDescription": false,
+        "NSCameraUsageDescription": "Parkd requires access to your camera to scan license plates."
       }
     },
     "android": {
@@ -25,8 +27,18 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "permissions": ["CAMERA"],
+      "package": "com.yourname.parkd"
     },
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Parkd requires access to your camera to scan license plates."
+        }
+      ]
+    ],
     "web": {
       "favicon": "./assets/favicon.png"
     }

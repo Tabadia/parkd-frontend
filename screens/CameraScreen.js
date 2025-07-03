@@ -22,14 +22,27 @@ const CameraScreen = ({ navigation }) => {
 
   if (!permission.granted) {
     return (
-      <View style={styles.loadingContainer}>
-        <Text>No access to camera</Text>
-        <TouchableOpacity style={styles.captureButton} onPress={requestPermission}>
-          <Text style={styles.captureText}>Grant Permission</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.cancelButton} onPress={() => navigation.popToTop()}>
-          <Text style={styles.cancelText}>Back to Home</Text>
-        </TouchableOpacity>
+      <View style={styles.permissionContainer}>
+        <View style={styles.permissionContent}>
+          <Ionicons name="camera" size={60} color="#933243" style={styles.permissionIcon} />
+          <Text style={styles.permissionTitle}>Camera Access Required</Text>
+          <Text style={styles.permissionText}>
+            To scan license plates, we need access to your camera. Please grant camera permissions to continue.
+          </Text>
+          <TouchableOpacity 
+            style={styles.grantButton} 
+            onPress={requestPermission}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.grantButtonText}>Grant Camera Permission</Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={styles.backButton} 
+            onPress={() => navigation.popToTop()}
+          >
+            <Text style={styles.backButtonText}>Back to Home</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -298,11 +311,67 @@ const styles = StyleSheet.create({
   spacer: {
     width: 90, // Same as cancel button width to balance the layout
   },
+  permissionContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    padding: 20,
+  },
+  permissionContent: {
+    width: '100%',
+    maxWidth: 300,
+    alignItems: 'center',
+  },
+  permissionIcon: {
+    marginBottom: 20,
+  },
+  permissionTitle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 15,
+    textAlign: 'center',
+    color: '#333',
+  },
+  permissionText: {
+    fontSize: 16,
+    textAlign: 'center',
+    marginBottom: 30,
+    color: '#666',
+    lineHeight: 24,
+  },
+  grantButton: {
+    backgroundColor: '#933243',
+    paddingVertical: 15,
+    paddingHorizontal: 25,
+    borderRadius: 8,
+    width: '100%',
+    alignItems: 'center',
+    marginBottom: 15,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+  },
+  grantButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  backButton: {
+    padding: 15,
+  },
+  backButtonText: {
+    color: '#933243',
+    fontSize: 16,
+    fontWeight: '500',
+  },
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#000',
+    backgroundColor: '#fff',
   },
   processingOverlay: {
     position: 'absolute',
